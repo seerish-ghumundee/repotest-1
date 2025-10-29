@@ -25,14 +25,6 @@ pipeline {
         buildDiscarder(logRotator(daysToKeepStr: '10', numToKeepStr: '5', artifactNumToKeepStr: '2'))
     }
     stages {
-        stage('Maven build') {
-            steps {
-                container('maven') {
-                    echo "Building maven artifacts ${params.SKIP_TEST ? 'without' : 'with'} unit testing ..."
-                    sh "${mavenData.mavenBuildStage(params.SKIP_MAVEN_DEPLOY, params.SKIP_TEST, env.BUILD_NUMBER)}"
-                }
-            }
-        }
         stage('Docker Build') {
             when {
                 expression { params.SKIP_DOCKER_BUILD == false }
