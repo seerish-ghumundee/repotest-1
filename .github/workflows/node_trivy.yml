@@ -1,0 +1,12 @@
+name: Trivy Scan for Node.js
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  trivy-scan:
+      uses: mnsltd/DEVOPS-githubworkflows/.github/workflows/trivy-node-ci.yml@develop
+      with:
+          node-version: ''
+          docker-build-command: 'docker build'
+          docker-module: '.'
+      secrets: inherit
