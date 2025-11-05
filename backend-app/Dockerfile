@@ -1,10 +1,10 @@
-FROM amazoncorretto:21 as builder
+FROM openjdk:21 as builder
 WORKDIR application
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM amazoncorretto:21
+FROM openjdk:21
 WORKDIR application
 COPY --from=builder application/dependencies/ ./
 RUN true
