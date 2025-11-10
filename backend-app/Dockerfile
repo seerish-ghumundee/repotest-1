@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk as builder
+FROM openjdk:21 as builder
 WORKDIR application
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
